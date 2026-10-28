@@ -1,0 +1,33 @@
+[package]
+name = "temp-cleaner"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.95"
+description = "A small, safety-first Windows Temp cleaner"
+license = "MIT"
+publish = false
+
+[lib]
+name = "temp_cleaner"
+path = "src/lib.rs"
+
+[[bin]]
+name = "temp-cleaner"
+path = "src/main.rs"
+
+[dependencies]
+eframe = { version = "=0.37.0", default-features = false, features = ["default_fonts", "glow", "system_fonts"] }
+windows-sys = { version = "=0.61.2", features = [
+    "Win32_Foundation",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Environment",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+opt-level = "s"
+strip = true
+
+
